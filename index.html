@@ -1,1 +1,31 @@
-北京欢迎你  为你开天辟地！
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				height: 0px;
+				background-color: red;
+				font: bold 100px/300px "宋体";
+				text-align: center;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			你好，中国！
+			<img src="img/file.png"/>
+		</div>
+		<script src="js/move.js"></script>
+		<script type="text/javascript">
+			var div = document.getElementsByTagName('div')[0];
+			move(div,{height:300},2000,'linear',function(){
+				setTimeout(function(){
+					move(div,{height:0},2000,'linear')
+				},200)
+			})
+		</script>
+	</body>
+</html>
