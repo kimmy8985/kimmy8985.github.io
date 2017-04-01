@@ -1,0 +1,88 @@
+	body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;}
+	ol,ul{list-style:none; padding:0;margin:0;}
+	li{list-style:none;}
+	a{text-decoration:none;}
+	img{border:none;vertical-align:top;}
+	li{list-style:none;}
+	h1,h2,h3,h4,h5,h6,strong,b{font-weight:normal ;}
+	i,em{font-style:normal;}
+	.clearfix:after{content:"" ;display: block;clear:both;height:0;
+				overflow: hidden;visibility: hidden;}
+	.clearfix{zoom:1;}
+	form{margin:0 ;}
+	input{margin:0;padding:0 ;border: 0;background: none;}
+	body{font-size:12px ;font-family: "微软雅黑";}
+	.header{
+		height:26px ;
+		background:#f2f2f2 ;
+		border-bottom:1px solid #e5e5e5 ;
+		width:100% ;
+		}	
+	.header .title{
+		width:1190px ;
+		height:26px ;
+		margin:0 auto ;
+		}	
+	.header .title .title_L{float: left;line-height:26px ;}
+	.header .title .title_R{float: right;line-height:26px ;}
+	.header .title_L a{
+		float:left;
+		margin-right:21px ;
+		color:#999;
+		}
+	.header .title_L i{
+		float: left;
+		color:#999;
+		}
+	.header .title_R a{color:#999;}	
+	.header .title_R span{color:#ccc;}	
+	.header .title_L .lt{
+		width:48px ;
+		background:url(../img/red.jpg) no-repeat left 8px ;
+		padding-left: 17px;
+		}	
+	.header .title_R a,span{float: left;}	
+	.header .title_R em{
+			float: left;
+			width:6px ;height:3px ;
+			background:url(../img/dianji.jpg) right 12px ;
+			margin:12px 15px 0 4px ;
+			}	
+	.header .title_R .heart_icon{
+		float: left;
+		width: 11px;height:11px ;
+		background:url(../img/xin.jpg);
+		margin:7px 4px 0 0 ;
+		}	
+	.header .title_R .cart_icon{
+		float: left;
+		width:14px ;height:12px ;
+		background:url(../img/gouwu.jpg) ;
+		margin:7px 4px 0 19px ;
+		}	
+	.header .title_R .r2{margin-right:22px ;}	
+	.header .title_R .small_icon{
+		float: left;
+		width:6px ;height:3px ;
+		background:url(../img/dianji.jpg);
+		margin:12px 12px 0 4px;
+		}
+	.header .title_R .tele_icon	{
+		float: left;
+		width:10px ;height:14px ;
+		background: url(../img/phone.jpg);
+		margin: 8px 5px 0 13px;
+		}
+	.header .title_R .r4,.r5{margin-right:21px;}	
+	.header .title_R .little_icon{
+		float: left;
+		width:6px ;height:7px ;
+		background: url(../img/dianji.jpg) no-repeat;
+		margin:12px 18px 0 4px ;
+		}
+	.header .title_R .nav_icon{
+		float: left;
+		width:11px ;height:12px;
+		background: url(../img/kuang.jpg);
+		margin:8px 6px 0 0 ;
+		}
