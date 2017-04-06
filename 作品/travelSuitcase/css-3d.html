@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>index2</title>
+		<script>
+			var iScale = 1 / window.devicePixelRatio;
+			document.write('<meta name="viewport" content="width=device-width,initial-scale='+iScale+',minimum-scale='+iScale+',maximum-scale='+iScale+',user-scalable=no"/>');
+		</script>
+		<script>
+			var iWidth = document.documentElement.clientWidth;
+			document.getElementsByTagName('html')[0].style.fontSize = iWidth /64+ 'px';
+		</script>
+		<style>
+			html,body{
+				margin: 0;
+				width: 100%;;
+				height: 100%;
+			}
+			#wrap div {
+				width: 100%;
+				height: 100%;
+				border: none;
+				vertical-align: top;
+				position: absolute;
+				-webkit-transform-origin: right;
+				/*border: 2px solid red;*/
+			}
+			
+			img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			#box {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				-webkit-transform-style: preserve-3d;
+				-webkit-transform-origin: right;
+			}
+			
+			#wrap {
+				width: 100%;
+				height: 100%;
+				/*border: 5px solid black;*/
+				overflow: hidden;
+				perspective: 19.3rem;
+			}
+			
+			.musicbtn {
+				height: 2.8rem;
+				width: 2.8rem;
+				position: absolute;
+				top: 1.7rem;
+				right: 1.0rem;
+				background: rgba(255, 255, 255, .2) url(img/musicbtn.png) no-repeat center 0px;
+				background-size: 100% auto;
+				z-index: 888;
+				border: 1px solid #fff;
+				border-radius: 50%;
+			}
+			/*------------------页面渲染--------------------------*/			
+			#preload {
+			   display: block;
+			   background: url(img/bg.jpg);
+			   position: absolute;
+			    top: 0px;
+			    left: 0px;
+			    width: 100%;
+			    height: 100%;
+			    overflow: hidden;
+			    z-index: 99999999999999999999999999999999;
+			}
+			#preload .group {
+			    left: 50%;
+			    top: 50%;
+			    position: absolute;
+			    margin: -70px 0 0 0;
+			    transform: rotateZ(0deg) scale3d(1, 1, 1);
+			    transform-origin: left center;
+			}
+			#preload .p1 {
+			    width: 453px;
+			    height: 236px;
+			    background: url(img/p1.png) no-repeat;
+			    margin: -90px 0 0 -226px;
+			}
+			#preload .box1 {
+			    width: 333px;
+			    height: 102px;
+			    background: url(img/box1.png) no-repeat;
+			    margin: -30px 0 0 -166px;
+			    position: absolute;
+			    z-index: -1;
+			}
+			#preload .cat {
+			    width: 139px;
+			    height: 53px;
+			    background: url(img/cat.png) no-repeat;
+			    margin: 20px 0 0 -69px;
+			    position: absolute;
+			    z-index: -1;
+			}
+			#preload .box2 {
+			    width: 333px;
+			    height: 97px;
+			    background: url(img/box2.png) no-repeat;
+			    margin: -40px 0 0 -166px;
+			}
+			#preload .n1{
+			    width: 20px;
+			    height: 44px;
+			    margin: 20px 0 0 -25px;
+			    line-height: 44px;
+			    font-size: 30px;
+			    text-align: center;
+			    color: #fff;
+			    position: absolute;
+			}
+		</style>
+	</head>
+
+	<body>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+		<audio class="musicaudio" src="Lost my pieces.mp3" loop></audio>
+		<!-------------------------页面渲染---------------------------------------->
+		<div id="preload">
+	        <div class="group" style="transform: rotateZ(0deg) scale3d(1, 1, 1);">
+	            <div class="p1"></div>
+	            <div class="box1" style="margin-top: -80px;"></div>
+	            <div class="cat" style="margin-top: -30px;"></div>
+	            <div class="box2"></div>
+	            <div class="n1">0</div>
+	        </div>
+	    </div>
+	    <div class="musicbtn"></div>
+		<div id='wrap'>
+			<div id="box"></div>
+		</div>
+	    <script src="move4.js"></script>
+		<script>
+			var box1 = document.getElementsByClassName("box1")[0];
+			var cat = document.getElementsByClassName("cat")[0];
+			var n1 = document.getElementsByClassName("n1")[0];
+			var group = document.getElementsByClassName("group")[0];
+			var preload = document.getElementById("preload");
+			var num = n1.innerHTML;//n1数字
+			//console.log(num);
+			var nDeg = 0;//控制度数deg
+			var nScale = 0;//控制scale3d
+			var nOpacity = 1;//控制opacity
+			var timer1 = null;
+			var timer2 = null;//度数
+			var timer3 = null;//opacity
+			var timer4 = null;//scale
+			move(box1,{marginTop:-140},1000,'linear');
+			move(cat,{marginTop:-90},1000,'linear');
+			clearInterval(timer1)
+			timer1 = setInterval(function(){
+				//n1数字
+				num++;
+				n1.innerHTML = num;
+				if (num>99) {
+					num = 100;
+					clearInterval(timer1)
+					clearInterval(timer2)
+					timer2 = setInterval(function(){
+						//度数
+						nDeg++;
+						group.style.transform = 'rotateZ('+nDeg+'deg) scale3d('+nScale+', '+nScale+', 1)';
+						if (nDeg > 89) clearInterval(timer2)
+					},8)
+					clearInterval(timer3)
+					timer3 = setInterval(function(){
+						//opacity
+						nOpacity = nOpacity - 0.05;
+						if(nOpacity <= 0) {
+							nOpacity = 0;
+							preload.style.display = 'none';
+							clearInterval(timer3)
+						}
+						preload.style.opacity = nOpacity;
+					},40)
+					clearInterval(timer4)
+					timer4 = setInterval(function(){
+						//scale
+						nScale = nScale + 0.2;
+						if (nScale > 3) {
+							nScale = 4;
+							clearInterval(timer4)
+						}
+					},24)
+				}
+			},9)
+				
+//			setTimeout(function(){
+				//======================music part===========================
+				var musicao = document.getElementsByClassName('musicaudio')[0];
+				var musicbtn = document.getElementsByClassName('musicbtn')[0];
+				window.onload = function() {
+					musicao.play();
+					musicbtn.style.cssText = 'background-position:center 0px;'
+				}
+				musicbtn.onclick = function() {
+					if(musicao.paused) {
+						musicao.play();
+						musicbtn.style.cssText = 'background-position:center 0px;'
+					} else {
+						musicao.pause();
+						musicbtn.style.cssText = 'background-position:center -47px;'
+					};
+				};
+				//=======================music part end =========================
+				var box = document.getElementById('box');
+				box.isRun = true;
+				for(var i = 0; i < 20; i++) { //布局
+					var div = document.createElement('div');
+					div.style.WebkitTransform = "rotateY(" + i * -18 + "deg) ";
+					box.appendChild(div);
+				}
+				var divs = box.getElementsByTagName('div');
+				for(var i = 0; i < divs.length; i++) {
+					divs[i].style.background = "url('img/a.png')";
+					divs[i].style.backgroundSize = '100% 100%'; //添加背景
+				}
+				for(var i = 0; i < divs.length / 2; i++) {
+					var oImg = document.createElement('img');
+					oImg.src = 'img/' + i + '.png';
+					divs[2 * i].appendChild(oImg); //添加元素
+				}
+	
+				var isClick = true;
+				var timer = '';
+				box.onclick = function() {
+					clearTimeout(timer);
+					console.log(this.isRun, 'this.isRun');
+					if(isClick) {
+						if(box.isRun) {
+							clearTimeout(rotateTimer);
+							box.isRun = false;
+						} else {
+							rotateFn();
+							console.log('ddddddd');
+							box.isRun = true;
+						}
+					} else {
+						isClick = true;
+					}
+				}
+				var x = '';
+				box.onmousedown = function(ev) {
+					var ev = ev || event;
+					ev.preventDefault();
+					x = ev.clientX;
+					timer = setTimeout(function() {
+						isClick = false;
+					}, 200);
+	
+				}
+				box.onmouseup = function(ev) {
+					var ev = ev || event;
+					if(ev.clientX > x) {
+						console.log('逆时针');
+						iSpeed = 2;
+					}
+					if(ev.clientX < x) {
+						console.log('顺时针');
+						iSpeed = -2;
+					}
+				}
+				box.rotate = 0;
+				var iSpeed = 2;
+				var rotateTimer = null;
+				var n = 0;
+				var isFront = false; //判断更新的图片为前十张还是后十张
+				function rotateFn() { //旋转整个盒子.
+					rotateTimer = setInterval(function() {
+						var a = Math.abs(box.rotate);
+						if(a % 180 == 40) { //转到指定角度更新图片
+							if(iSpeed > 0) {
+								if(isFront) { //更新前十张
+									var i = 0;
+									var m = 10;
+									isFront = false;
+								} else {
+									var i = 10;
+									var m = divs.length;
+									isFront = true;
+								}
+							} else {
+								if(isFront) { //更新后十张
+									var i = 10;
+									var m = divs.lengt;
+									isFront = false;
+								} else {
+									var i = 0;
+									var m = 10;
+									isFront = true;
+								}
+							}
+							for(; i < m; i++) { //更新图片
+								divs[i].style.background = "url(" + arr[n] + ")";
+								divs[i].style.backgroundSize = '100% 100%';
+//								console.log(i);
+							}
+							n++;
+							if(n == arr.length) {
+								n = 0;
+							}
+						}
+						box.rotate += iSpeed;
+						box.style.transform = 'rotateY(' + box.rotate + 'deg)';
+					}, 30);
+				}
+				rotateFn();
+				var arr = ['img/a.png', 'img/b.png', 'img/c.png', 'img/d.png', 'img/e.png', 'img/f.png', 'img/g.png'];
+//			},1750)
+		</script>
+	</body>
+
+</html>
